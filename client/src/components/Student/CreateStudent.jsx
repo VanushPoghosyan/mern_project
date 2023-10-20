@@ -15,17 +15,12 @@ import { studentSchema} from '../../utils/yup.js';
 const CreateStudent = () => {
   const {student,status} = useSelector(state => state.student);
 
-  const {id} = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   //NAVIGATE HOME PAGE AND TOAST STATUS
   useEffect(() => {
       if(status === "Студент успешно создан") {navigate("/");toast(status)}
-      else{
-        toast(status)
-      }
-    
   },[status]);
 
   //REACT-HOOK-FORM

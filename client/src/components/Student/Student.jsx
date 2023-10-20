@@ -17,7 +17,7 @@ const Student = ({student:{_id,firstName,lastName,userName,image}}) => {
   const isAuth = useSelector(isCheckAuth);
   const {status} = useSelector(state => state.student);
 
-  //TOAST
+  //TOAST status
   useEffect(() => {
     if(status === "Успешно удалено") toast(status);
   },[status]);

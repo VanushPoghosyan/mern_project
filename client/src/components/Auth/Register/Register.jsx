@@ -14,9 +14,9 @@ const Register = () => {
     const dispatch = useDispatch();
 
     const isAuth = useSelector(isCheckAuth);
-    const{status,token} = useSelector(state => state.auth)
+    const{status,token,isLoading} = useSelector(state => state.auth)
 
-    //NAVIGATE TO HOME PAGE
+    //Navigate home page when isAuth true and localStorage set token
     useEffect(() =>{
       if(isAuth){
         window.localStorage.setItem("token",token);
@@ -24,7 +24,7 @@ const Register = () => {
       }
     },[isAuth]);
 
-    //TOAST
+    //TOAST status
     useEffect(()=> {
       if(status === "Регистрация прошла успешно")toast(status)
     },[status])
@@ -108,6 +108,7 @@ const Register = () => {
       />
      
       <StyledLoadingButton
+        loading={!!isLoading}
         type="submit"
         variant="contained"
       >

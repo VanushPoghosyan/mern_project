@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import NavBar from '../NavBar/NavBar'
 import { StyledContainer } from '../Home/style';
 import {Box, Stack,TextField} from '@mui/material'
@@ -29,8 +29,8 @@ const SingleStudent = () => {
 
   //NAVIGATE HOME PAGE AND TOAST STATUS
   useEffect(() => {
-    if(status === "Успешно обновлен") {navigate("/");toast(status)}
-    else{toast(status)}
+    if(status === "Успешно обновлен") {navigate("/");
+    toast(status)}
   },[status]);
 
   //REACT-HOOK-FORM
@@ -85,7 +85,7 @@ const SingleStudent = () => {
                  margin="normal"
                  fullWidth
                  variant="outlined"
-                 defaultValue={student?.lastName || ""}
+                 defaultValue={student?.lastName}
                />
                <TextField
                  {...register("userName")}

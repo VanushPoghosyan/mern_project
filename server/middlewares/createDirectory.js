@@ -1,4 +1,4 @@
-import path, {resolve} from 'path';
+import path from 'path';
 import {mkdirSync} from 'fs'
 
 export const createDir = name => {

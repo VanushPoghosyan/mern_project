@@ -65,13 +65,13 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.user = payload?.user;
             state.token = payload?.token;
-            state.status = payload.message
+            state.status = payload?.message
         });
         builder.addCase(registerUser.rejected,(state,{payload}) => {
             state.isLoading = false;
             state.user = null;
             state.token = null;
-            state.status = payload.message
+            state.status = payload?.message
         });
 
          //LOGIN USER
@@ -82,15 +82,15 @@ const authSlice = createSlice({
         });
         builder.addCase(loginUser.fulfilled,(state,{payload}) => {
             state.isLoading = false;
-            state.user = payload.userData;
-            state.token = payload.token;
-            state.status = payload.message
+            state.user = payload?.userData;
+            state.token = payload?.token;
+            state.status = payload?.message
         });
         builder.addCase(loginUser.rejected,(state,{payload}) => {
             state.isLoading = false;
             state.user = null;
             state.token = null;
-            state.status = payload.message
+            state.status = payload?.message
         });
 
         //CHECK AUTH USER
@@ -104,7 +104,7 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.user = payload?.user || null;
             state.token = payload?.token || null;
-            state.status = payload.message
+            state.status = payload?.message
         });
         builder.addCase(checkAuthUser.rejected,(state,{payload}) => {
             state.isLoading = false;

@@ -70,7 +70,6 @@ const studentSlice = createSlice({
     initialState,
     reducers:{},
     extraReducers:builder => {
-
         //CREATE STUDENT
         builder.addCase(createStudent.pending,(state) => {
             state.isLoading = true;
@@ -80,7 +79,7 @@ const studentSlice = createSlice({
         });
         builder.addCase(createStudent.fulfilled,(state,{payload}) => {
             state.isLoading = false;
-            state.student=payload.student;
+            state.student=payload?.student;
             state.students = null;
             state.status = payload?.message
 
@@ -89,7 +88,7 @@ const studentSlice = createSlice({
             state.isLoading = true;
             state.student=null;
             state.students = null;
-            state.status = payload.message
+            state.status = payload?.message
         });
 
         //UPDATE STUDENT
@@ -101,7 +100,7 @@ const studentSlice = createSlice({
         });
         builder.addCase(updateStudent.fulfilled,(state,{payload}) => {
             state.isLoading = false;
-            state.student=payload.student;
+            state.student=payload?.student;
             state.students = null;
             state.status = payload?.message
 
@@ -110,7 +109,7 @@ const studentSlice = createSlice({
             state.isLoading = true;
             state.student=null;
             state.students = null;
-            state.status = payload.message
+            state.status = payload?.message
         });
 
         //GET ALL STUDENTS
@@ -123,7 +122,7 @@ const studentSlice = createSlice({
         builder.addCase(getAllStudents.fulfilled,(state,{payload}) => {
             state.isLoading = false;
             state.student=null;
-            state.students = payload.students;
+            state.students = payload?.students;
             state.status = null
 
         });
@@ -131,7 +130,7 @@ const studentSlice = createSlice({
             state.isLoading = true;
             state.student=null;
             state.students = null;
-            state.status = payload.message
+            state.status = payload?.message
         });
 
          //GET ONE STUDENT
@@ -152,7 +151,7 @@ const studentSlice = createSlice({
             state.isLoading = true;
             state.student=null;
             state.students = null;
-            state.status = payload.message
+            state.status = payload?.message
         });
 
          //DELETE STUDENT
@@ -167,14 +166,14 @@ const studentSlice = createSlice({
             state.student=null;
             console.log(payload);
             state.students = payload?.students;
-            state.status = payload.message
+            state.status = payload?.message
 
         });
         builder.addCase(deleteStudent.rejected,(state,{payload}) => {
             state.isLoading = true;
             state.student=null;
             state.students = null;
-            state.status = payload.message
+            state.status = payload?.message
         });
     }
 });

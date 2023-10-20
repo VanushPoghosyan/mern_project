@@ -34,7 +34,7 @@ const NavBar = () => {
         setAvatar(user?.firstName)
     },[user])
 
-    //TOAST
+    //TOAST ststus
     useEffect(() => {
       if(status === "Вы вышли из аккаунта")toast(status)
     },[status]);

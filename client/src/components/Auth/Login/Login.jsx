@@ -15,7 +15,7 @@ const Login = () => {
     const isAuth = useSelector(isCheckAuth);
     const {token,isLoading,status} = useSelector(state => state.auth);
 
-    //NAVIGATE TO HOME PAGE
+    //Navigate home page when isAuth true and localStorage set token
     useEffect(() =>{
       if(isAuth){
         window.localStorage.setItem("token",token)
@@ -23,7 +23,7 @@ const Login = () => {
       }
     },[isAuth]);
 
-    //TOAST
+    //TOAST status
     useEffect(()=> {
       if(status === "Авторизация прошла успешно")toast(status)
     },[status])

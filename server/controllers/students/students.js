@@ -10,9 +10,11 @@ export const createStudent = async(req,res) => {
 
         const fileName = `${req.file?.originalname}`;
 
+        //Find current student by email
         const candidate = await Student.findOne({email});
         if(candidate) return res.json({message : "Пользователь с таким email уже существует"});
 
+        //Create student
         const student = new Student({firstName,lastName,userName,email,
             image:fileName === "undefined" ? "person.png" : fileName});
         await student.save();
@@ -31,7 +33,7 @@ export const updateStudent = async(req,res) => {
 
         const {firstName,lastName,userName,email} = req.body;
 
-        console.log(req.file);
+        //Find by ID and update
         const student = await Student.findByIdAndUpdate(
             {_id:req.params.id},
             {firstName,lastName,userName,email},
@@ -57,6 +59,7 @@ export const deleteStudent = async(req,res) => {
             fs.unlinkSync(`${pathName}/${currentImage}`);
         }
         
+        //Find by ID and delete
        await Student.findByIdAndRemove(
         {_id:req.params.id},
         {returnDocument:"after"});
