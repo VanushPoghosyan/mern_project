@@ -9,7 +9,6 @@
 
 ## Getting Started
 ```npm install ```, 
-```add in .env file PORT,DB_URL,JWT_SECRET_KEY ```,
 ```npm start ```
 
 ## Backend
@@ -21,6 +20,7 @@
 
 ## Getting Started
 ```npm install``` ,
+```add in .env file PORT,DB_URL,JWT_SECRET_KEY ```,
 ```npm run dev ```
 
 ## Author 
