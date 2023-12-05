@@ -15,6 +15,12 @@ const userSchema = new Schema({
     },
     password:{
         type:String,required:true
+    },
+    country:{
+        type:String,required:true
+    },
+    gender:{
+        type:String,required:true
     }
 },{timestamps: true});
 

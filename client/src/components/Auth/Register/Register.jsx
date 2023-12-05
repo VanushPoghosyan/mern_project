@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import {TextField} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import {TextField,FormControl,InputLabel,MenuItem,Box,Checkbox,FormGroup,FormControlLabel} from '@mui/material';
 import { RootBox,  StyledAuthTypography,  StyledBox, StyledLink, StyledLoadingButton, StyledTitle } from './styles.js';
 import { useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
@@ -7,14 +7,30 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import {  registerSchema } from '../../../utils/yup.js';
 import {useDispatch, useSelector} from 'react-redux'
 import { isCheckAuth, registerUser } from '../../../redux/slice/authSlice.js';
-import {toast} from 'react-toastify'
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+// import { countries } from '../../../data/data.js';
 
-const Register = () => {
+import {toast} from 'react-toastify'
+import axios from '../../../utils/axios.js';
+
+const Register =  () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const isAuth = useSelector(isCheckAuth);
-    const{status,token,isLoading} = useSelector(state => state.auth)
+    const{status,token,isLoading} = useSelector(state => state.auth);
+
+    const[gender,setGender] = useState("");
+
+    const[countries,setCountries] = useState([]);
+    useEffect(() => {
+      async function getCountries(){
+        const {data} = await axios.get("/country");
+        setCountries(data.countries)
+        
+      };
+      getCountries()
+    },[]);
 
     //Navigate home page when isAuth true and localStorage set token
     useEffect(() =>{
@@ -46,8 +62,15 @@ const Register = () => {
       });
 
       const onHandleSubmit = (data)=> {
+        data.country = country;
+        data.gender = gender;
         dispatch(registerUser(data))
       }
+
+      const [country, setCountry] = React.useState('');
+      const handleChange = (event) => {
+        setCountry(event.target.value);
+      };
 
   return (
     <RootBox>
@@ -106,6 +129,28 @@ const Register = () => {
         variant="outlined"
         label="Password"
       />
+
+    <Box sx={{ minWidth: 120,mt:2,mb:2 }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Country</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={country}
+          label="Country"
+          onChange={handleChange}
+        >
+          {countries.map(({id,countryName}) => (
+              <MenuItem  key={id} value={countryName}>{countryName}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </Box>
+
+    <Box>
+        <FormControlLabel control={<Checkbox onChange={() => setGender("men")}/>} label="Men"/>
+        <FormControlLabel control={<Checkbox onChange={() => setGender("women")}/>} label="Women" />            
+    </Box>
      
       <StyledLoadingButton
         loading={!!isLoading}

@@ -14,7 +14,9 @@ const NavBar = () => {
 
     const isAuth = useSelector(isCheckAuth);
     const {user,status} = useSelector(state => state?.auth);
-    const {students} = useSelector(state => state.student)
+    const {students} = useSelector(state => state.student);
+
+  
 
     //search firstName; LIVE SEARCH
     const [name,setName] = useState("");

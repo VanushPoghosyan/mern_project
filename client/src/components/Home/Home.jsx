@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
 const Home = () => {
-  const {students} = useSelector(state => state.student);
+  const {students} = useSelector(state => state?.student);
 
   return (
     <>

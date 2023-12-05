@@ -10,7 +10,7 @@ export const register = async(req,res) => {
     try{
         if(!req.body)return res.json({message :"Пустые данные"});
 
-        const {firstName,lastName,userName,email} = req.body;
+        const {firstName,lastName,userName,email,country,gender} = req.body;
 
         //FIND USER BY EMAIL
         const candidate = await User.findOne({email});
@@ -20,7 +20,7 @@ export const register = async(req,res) => {
         const hashPassword = await bcrypt.hash(req.body.password,10);
 
         //CREATE USER
-        const user = new User({firstName,lastName,userName,email,password:hashPassword});
+        const user = new User({firstName,lastName,userName,email,password:hashPassword,country,gender});
         await user.save();
 
         //CREATE TOKEN
